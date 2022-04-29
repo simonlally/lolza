@@ -16,8 +16,6 @@ export default function Home() {
       },
     });
 
-    console.log({ response });
-
     setSummonerData(await response);
     setSummonerId(await response.data[0].summonerId);
     setSubmitting(false);
@@ -29,8 +27,6 @@ export default function Home() {
         id: summonerId,
       },
     });
-
-    console.log({ response });
   };
 
   const handleSummonerName = (e) => setSummonerName(e.target.value);
