@@ -1,14 +1,22 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import axios from "axios";
+import { headers } from "./headers/riot";
 
 export default async function handler(req, res) {
   const url = `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${req.query.name}`;
 
   const response = await axios.get(url, {
-    headers: {
-      "X-Riot-Token": process.env.RIOT_API_KEY,
-    },
+    headers: headers,
   });
-  res.status(200).json(response.data);
+
+  const id = response.data.id;
+
+  const newUrl = `https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}`;
+
+  const nextResponse = await axios.get(newUrl, {
+    headers: headers,
+  });
+
+  res.status(200).json(nextResponse.data);
 }
