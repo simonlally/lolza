@@ -1,12 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
-import { Button, Flex, Input, Spacer } from "@chakra-ui/react";
+import { Button, Flex, Input, Image, Spacer, Heading } from "@chakra-ui/react";
 
 export default function Home() {
   const [summonerName, setSummonerName] = useState("");
   const [summonerId, setSummonerId] = useState("");
-  const [submitting, setSubmitting] = useState(false);
   const [summonerData, setSummonerData] = useState({});
+  const [submitting, setSubmitting] = useState(false);
 
   const getSummonerData = async () => {
     setSubmitting(true);
@@ -45,12 +45,17 @@ export default function Home() {
   });
 
   const Overview = ({ data }) => {
-    const { leaguePoints, queueType, losses, wins, tier, rank, summonerName } =
-      data;
+    const { leaguePoints, queueType, losses, wins, tier, rank } = data;
 
     return (
       <div>
-        <p>{summonerName}</p>
+        <p>
+          <Image
+            src={`/assets/ranked-emblems/${tier.toLowerCase()}.png`}
+            alt=''
+            h='95px'
+          />
+        </p>
         <p>
           {`${
             queueType === "RANKED_SOLO_5x5" ? "Ranked Solo/Duo" : "Ranked Flex"

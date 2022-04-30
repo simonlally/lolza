@@ -12,6 +12,8 @@ export default async function handler(req, res) {
 
   const id = response.data.id;
 
+  console.log(response.data);
+
   const newUrl = `https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}`;
 
   const nextResponse = await axios.get(newUrl, {
